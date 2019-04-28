@@ -15,19 +15,15 @@ class Instructor
 
   def fail_student(student_inst, test_name)
   
-    if BoatingTest.all.select {|boat_test| boat_test.student.first_name == student_inst.first_name && test_name == boat_test.test_name } == []
+    if BoatingTest.all.select {|b_t| b_t.student.first_name == student_inst.first_name && test_name == b_t.test_name } == []
       test_name = BoatingTest.new(student_inst,test_name,"failed",self)
     else
-      BoatingTest.all.each do |t1|
-        if t1.student.first_name == student_inst.first_name && test_name == t1.test_name 
-          t1.test_status = "failed"
-          break         
-        end
+      BoatingTest.all.each do |b_t|
+        b_t.student.first_name == student_inst.first_name && test_name == b_t.test_name ? b_t.test_status = "failed" : break       
       end
     end
   end
-    
-
+  
   def pass_student(student_inst, test_name)
 
     if BoatingTest.all.select {|boat_test| boat_test.student.first_name == student_inst.first_name && test_name == boat_test.test_name } == []
@@ -41,4 +37,11 @@ class Instructor
       end
     end
   end
+  
 end
+  
+
+
+ 
+
+
